@@ -20,3 +20,4 @@ jobs:
         run: bundle exec danger --verbose
         env:
           GITHUB_EVENT_PATH: ${{ github.event_path }}
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
