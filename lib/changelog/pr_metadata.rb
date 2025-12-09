@@ -17,13 +17,20 @@ module Danger
       end
 
       def self.from_github_plugin(github = nil)
-        return nil unless github&.pr_json
+        return nil unless github
 
-        new(
-          pr_json: github.pr_json,
-          pr_title: github.pr_title,
-          pr_author: github.pr_author
-        )
+        begin
+          pr_json = github.pr_json
+          return nil unless pr_json
+
+          new(
+            pr_json: pr_json,
+            pr_title: github.pr_title,
+            pr_author: github.pr_author
+          )
+        rescue Octokit::Unauthorized
+          nil
+        end
       end
 
       def self.from_event_file(path)
