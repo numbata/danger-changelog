@@ -30,4 +30,4 @@ jobs:
         with:
           script: |
             const script = require('./.github/scripts/post-danger-comment.js');
-            await script({ github, context });
+            await script({ github, context, core });
